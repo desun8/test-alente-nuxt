@@ -5,23 +5,29 @@ export default {
 
     store.commit('setPaginationCurr', pageNumber);
 
-    let products = await $axios.get(
-      'https://611a2bc9cbf1b30017eb5559.mockapi.io/product'
-    );
-    let brands = await $axios.get(
-      'https://611a2bc9cbf1b30017eb5559.mockapi.io/brand'
-    );
-    let categories = await $axios.get(
-      'https://611a2bc9cbf1b30017eb5559.mockapi.io/category'
-    );
+    if (store.state.products === null) {
+      let products = await $axios.get(
+        'https://611a2bc9cbf1b30017eb5559.mockapi.io/product'
+      );
+      products = await products.data;
+      store.commit('setProducts', products);
+    }
 
-    products = await products.data;
-    brands = await brands.data;
-    categories = await categories.data;
+    if (store.state.brands === null) {
+      let brands = await $axios.get(
+        'https://611a2bc9cbf1b30017eb5559.mockapi.io/brand'
+      );
+      brands = await brands.data;
+      store.commit('setBrands', brands);
+    }
 
-    store.commit('setProducts', products);
-    store.commit('setBrands', brands);
-    store.commit('setCategories', categories);
+    if (store.state.categories === null) {
+      let categories = await $axios.get(
+        'https://611a2bc9cbf1b30017eb5559.mockapi.io/category'
+      );
+      categories = await categories.data;
+      store.commit('setCategories', categories);
+    }
   }
 };
 </script>
