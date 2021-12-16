@@ -29,7 +29,6 @@ export default {
       <BaseInputRating
         v-for="item in ratings"
         :key="item"
-        :label="`Rating ${item} stars`"
         :value="item"
         :checked="+item === +value"
         name="rating"
@@ -38,7 +37,7 @@ export default {
       >
         <template #label>
           <span class="sr-only">{{ `Rating ${item} stars` }}</span>
-          <div class="flex gap-1.5">
+          <span class="flex gap-1.5">
             <svg
               v-for="(num, index) in Array.from(Array(5).keys())"
               :key="num"
@@ -57,7 +56,7 @@ export default {
                 clip-rule="evenodd"
               />
             </svg>
-          </div>
+          </span>
         </template>
         <template #count>
           3250
